@@ -1,42 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grinch</title> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grinch</title> 
     
-    <style>
+  <style>
+    /* ======= RESET ======= */
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
-body{
-    font-family: system-ui;
-   font-size: xxx-large;
-    min-height: 100vh;
-    color: rgb(0, 255, 26);
-    background: linear-gradient(blue,rgb(0, 255, 26));
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+    body {
+      font-family: system-ui;
+      color: rgb(0, 255, 26);
+      scroll-behavior: smooth;
+      background: black;
+    }
 
-h1{
+    h1 { font-size: 15vw; }
+    h2 { font-size: 10vw; }
+    a {
+      color: inherit;
+      font-size: xx-large;
+      text-decoration: none;
+    }
 
-font-size: 15vw;}
-h2{
-    font-size: 10vw;
-}
+    /* ======= CURSEUR CUSTOM ======= */
+    .cursor {
+      width: 30px;
+      height: 30px;
+      border: 2px solid blue;
+      border-radius: 50%;
+      background: rgba(0, 255, 26, 0.7);
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.2s ease, background 0.3s ease;
+      z-index: 9999;
+    }
 
-a{color: inherit;
-    font-size: xx-large;
-}
-    </style>
+    .cursor.active {
+      transform: translate(-50%, -50%) scale(1.5);
+      background: rgba(0, 255, 26, 0.9);
+    }
 
+    /* ======= HOME ======= */
+    .home {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: linear-gradient(blue, rgb(0, 255, 26));
+      text-align: center;
+    }
+
+    /* ======= MENU SECTION ======= */
+    .menu {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background: rgb(0, 255, 26);
+      position: relative;
+    }
+
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-left: 2rem;
+      padding: 1rem;
+      border: 2px solid blue;
+      border-radius: 8px;
+      background: rgb(0, 255, 26);
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.8s ease;
+    }
+
+    .tabs.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .tab {
+      padding: 1rem 2rem;
+      background: rgb(0, 255, 26);
+      color: blue;
+      border: 1px solid blue;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .tab:hover {
+      background: blue;
+      color: white;
+    }
+
+    /* ======= AUTRES SECTIONS ======= */
+    section[id] {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      background: #222;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-<h1>Grinch.</h1>
-<h2>The dumbest grafic designer in the world. </h2>
-<p><a href="https://www.instagram.com/dorian.levy_/">Dont Touch</a></p>
+  <!-- HOME -->
+  <section class="home">
+    <h1>Grinch.</h1>
+    <h2>The dumbest grafic designer in the world.</h2>
+    <p><a href="https://www.instagram.com/dorian.levy_/">Dont Touch</a></p>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu">
+    <div class="tabs">
+      <a href="#portfolio" class="tab">Portfolio</a>
+      <a href="#mypast" class="tab">My Past</a>
+      <a href="#dumbproject" class="tab">Dumb Project</a>
+      <a href="#game" class="tab">Game</a>
+    </div>
+  </section>
+
+  <!-- SECTIONS LIÉES -->
+  <section id="portfolio">Portfolio content</section>
+  <section id="mypast">My Past content</section>
+  <section id="dumbproject">Dumb Project content</section>
+  <section id="game">Game content</section>
+
+  <!-- CURSEUR CUSTOM -->
+  <div class="cursor"></div>
+
+  <script>
+    // Apparition des onglets au scroll
+    const tabs = document.querySelector('.tabs');
+    window.addEventListener('scroll', () => {
+      const menuTop = document.querySelector('.menu').getBoundingClientRect().top;
+      const trigger = window.innerHeight / 1.2;
+      if (menuTop < trigger) {
+        tabs.classList.add('visible');
+      }
+    });
+
+    // Curseur personnalisé
+    const cursor = document.querySelector('.cursor');
+    window.addEventListener('mousemove', e => {
+      cursor.style.left = e.pageX + 'px';
+      cursor.style.top = e.pageY + 'px';
+    });
+
+    // Réaction du curseur sur les liens
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => cursor.classList.add('active'));
+      link.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+    });
+  </script>
 </body>
 </html>
-
