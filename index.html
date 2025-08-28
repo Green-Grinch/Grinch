@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grinch</title> 
+  <title>Grinch - Home</title> 
     
   <style>
     /* ======= RESET ======= */
-    * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: system-ui;
       color: rgb(0, 255, 26);
-      scroll-behavior: smooth;
       background: black;
     }
 
@@ -22,25 +21,6 @@
       color: inherit;
       font-size: xx-large;
       text-decoration: none;
-    }
-
-    /* ======= CURSEUR CUSTOM ======= */
-    .cursor {
-      width: 30px;
-      height: 30px;
-      border: 2px solid blue;
-      border-radius: 50%;
-      background: rgba(0, 255, 26, 0.7);
-      position: fixed;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: transform 0.2s ease, background 0.3s ease;
-      z-index: 9999;
-    }
-
-    .cursor.active {
-      transform: translate(-50%, -50%) scale(1.5);
-      background: rgba(0, 255, 26, 0.9);
     }
 
     /* ======= HOME ======= */
@@ -97,17 +77,6 @@
       background: blue;
       color: white;
     }
-
-    /* ======= AUTRES SECTIONS ======= */
-    section[id] {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      background: #222;
-      color: white;
-    }
   </style>
 </head>
 <body>
@@ -121,21 +90,12 @@
   <!-- MENU -->
   <section class="menu">
     <div class="tabs">
-      <a href="#portfolio" class="tab">Portfolio</a>
-      <a href="#mypast" class="tab">My Past</a>
-      <a href="#dumbproject" class="tab">Dumb Project</a>
-      <a href="#game" class="tab">Game</a>
+      <a href="portfolio.html" class="tab">Portfolio</a>
+      <a href="museum.html" class="tab">Museum</a>
+      <a href="contact.html" class="tab">Contact</a>
+      <a href="index.html" class="tab">Home</a>
     </div>
   </section>
-
-  <!-- SECTIONS LIÉES -->
-  <section id="portfolio">Portfolio content</section>
-  <section id="mypast">My Past content</section>
-  <section id="dumbproject">Dumb Project content</section>
-  <section id="game">Game content</section>
-
-  <!-- CURSEUR CUSTOM -->
-  <div class="cursor"></div>
 
   <script>
     // Apparition des onglets au scroll
@@ -146,20 +106,6 @@
       if (menuTop < trigger) {
         tabs.classList.add('visible');
       }
-    });
-
-    // Curseur personnalisé
-    const cursor = document.querySelector('.cursor');
-    window.addEventListener('mousemove', e => {
-      cursor.style.left = e.pageX + 'px';
-      cursor.style.top = e.pageY + 'px';
-    });
-
-    // Réaction du curseur sur les liens
-    const links = document.querySelectorAll('a');
-    links.forEach(link => {
-      link.addEventListener('mouseenter', () => cursor.classList.add('active'));
-      link.addEventListener('mouseleave', () => cursor.classList.remove('active'));
     });
   </script>
 </body>
